@@ -4,24 +4,24 @@
     {
         public bool IsIsometric(string s, string t)
         {
-         var dictionary = new Dictionary<char, char>();
-         for (var i = 0; i < s.Length; i++)
-        {
-            if (dictionary.TryGetValue(s[i], out var currentPair))
+            var dictionary = new Dictionary<char, char>();
+            for (var i = 0; i < s.Length; i++)
             {
-                if (currentPair != t[i])
+                if (dictionary.TryGetValue(s[i], out var currentPair))
+                {
+                    if (currentPair != t[i])
+                    {
+                        return false;
+                    }
+                    continue;
+                }
+                if (dictionary.ContainsValue(t[i]))
                 {
                     return false;
                 }
-                continue;
+                dictionary.Add(s[i], t[i]);
             }
-            if (dictionary.ContainsValue(t[i]))
-            {
-                return false;
-            }
-            dictionary.Add(s[i], t[i]);
-        }
-        return true;
+            return true;
         }
     }
 }
